@@ -1,0 +1,18 @@
+.tree__container {
+  &.tree__root {
+    overflow-y: scroll;
+    height: 500px;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  .tree__name {
+    margin: 0;
+  }
+  .tree__list {
+    padding-left: 20px;
+  }
+  .icon-select, .icon-selected {
+    float: right;
+  }
+}
