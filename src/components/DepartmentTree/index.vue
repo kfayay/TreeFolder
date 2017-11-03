@@ -1,12 +1,19 @@
 <template>
   <div class="tree__container" :class="{'tree__root': root}">
-    <p class="tree__name" @click="fold"><span class="iconfont" :class="{'icon-home': root, 
-    'icon-folder': sub, 
-    'icon-fold': !root && !sub && localFoldStatus,
-    'icon-unfold': !root && !sub && !localFoldStatus}"></span>{{root ? '我的企业' : tree.name}}<span class="iconfont icon-select"></span></p>
+    <div class="tree__name" @click="fold">
+      <span class="iconfont tree__icon" :class="{'icon-home': root, 
+      'icon-fold': !root && localFoldStatus,
+      'icon-unfold': !root && !localFoldStatus}">
+      </span><span class="iconfont icon-folder tree__icon" v-show="sub"></span>
+      <p class="tree__name-content">{{root ? '我的企业' : tree.name}}</p><span class="iconfont icon-select"></span>
+    </div>
     <ul class="tree__list" v-show="!foldStatus">
-      <li class="tree__item" v-for="(item, index) of tree.member">{{item.nickname}}
-        <span class="iconfont" :class="{'icon-select': !item.selected, 'icon-selected': item.selected}" @click="select(item)"></span>
+      <li class="tree__item" v-for="(item, index) of tree.member">
+        <div class="tree__content">
+          <figure class="tree__item-figure" :class="{'tree__item-figure--default': !item.avatar}"><img :src="item.avatar" alt="" v-if="item.avatar"></figure>
+          <p class="tree__item-content">{{item.nickname+"(" + item.real_name + ")"}}</p>
+          <span class="iconfont" :class="{'icon-select': item.selected, 'icon-selected': !item.selected}" @click="select(item)"></span>
+        </div>
       </li>
       <li class="tree__item" v-if="tree.node">
         <department-tree v-for="(item, index) of tree.node" :tree="item" :parent-fold-status="foldStatus" :sub="root"></department-tree>
