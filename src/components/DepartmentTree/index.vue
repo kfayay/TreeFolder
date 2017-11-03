@@ -35,7 +35,8 @@
     },
     data () {
       return {
-        localFoldStatus: true
+        localFoldStatus: true,
+        childSelectAll: false
       }
     },
     bedoreCreate () {
@@ -51,7 +52,11 @@
         return _localFoldStatus
       },
       selectAll () {
-        return false
+        let _member = this.tree.member || []
+        if (_member.length > 0) {
+          return _member.find(item => !item.selected) === undefined
+        }
+        return true
       }
     },
     methods: {
@@ -60,6 +65,11 @@
       },
       select (item) {
         item.selected = !item.selected
+      }
+    },
+    watch: {
+      selectAll () {
+
       }
     }
   }
