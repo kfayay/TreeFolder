@@ -22,6 +22,7 @@
     display: inline-block;
     width: 20px;
     text-align: center;
+    cursor: pointer;
   }
   .tree__name-content {
     flex: 1;
@@ -56,6 +57,7 @@
     }
     &--default::after {
       content: '未';
+      font-size: 14px;
     }
   }
   .tree__item-content {

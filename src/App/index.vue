@@ -19,7 +19,7 @@
           <ul class="employee__list" v-if="employee.length > 0">
             <li class="employee__item" v-for="item in employee">
               <figure class="employee__figure" :class="{'employee__figure--default': true}">
-                <img src="#" alt="">
+                <img :src="item.avatar" alt="" v-if="item.avatar">
               </figure>
               <p class="employee__name">{{item.nickname + '(' + item.real_name + ')'}}</p>
               <span class="employee__btn-remove iconfont icon-remove" @click="remove(item.user_id)"></span>
@@ -61,7 +61,7 @@
             _employeeSet.add(item)
           })
         }
-        this.employeeList = Array.from(_employeeSet)
+        this.employeeList = Array.from(_employeeSet).reverse()
       },
       remove (id) {
         let _list = [id]
@@ -81,7 +81,6 @@
     created () {
       getDepartmentList().then(({data}) => {
         this.department = data
-        console.log(data)
       })
     }
   }

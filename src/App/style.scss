@@ -119,6 +119,7 @@ $height: 48px;
   }
   &--default::after {
     content: '未';
+    font-size: 14px;
   }
 }
 .employee__name {
@@ -129,9 +130,10 @@ $height: 48px;
   font-size: 14px;
 }
 .employee__btn-remove {
-  border: none;
-  font-size: 12px!important;
-  background: transparent;
+  display: inline-block;
+  padding: 3px;
+  font-size: 12px;
+  cursor: pointer;
 }
 .department__content {
   @include border(right);
