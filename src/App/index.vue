@@ -17,7 +17,7 @@
         <header class="body__header employee__header">直属成员数 {{employee.length || ''}}</header>
         <div class="body__content">
           <ul class="employee__list" v-if="employee.length > 0">
-            <li class="employee__item" v-for="item in employee">
+            <li class="employee__item" v-for="item in employee" :key="item.user_id">
               <figure class="employee__figure" :class="{'employee__figure--default': true}">
                 <img :src="item.avatar" alt="" v-if="item.avatar">
               </figure>
@@ -61,7 +61,7 @@
             _employeeSet.add(item)
           })
         }
-        this.employeeList = Array.from(_employeeSet).reverse()
+        this.employeeList = Array.from(_employeeSet)
       },
       remove (id) {
         let _list = [id]
@@ -73,9 +73,10 @@
         let _tree = this.department
         if (!Object.keys(_tree).length) return []
         let _employeeList = this.employeeList
-        return _employeeList.map((id) => {
+        let _employee = _employeeList.map((id) => {
           return TreeFind(_tree, (item) => item.user_id === id)
         })
+        return _employee.reverse()
       }
     },
     created () {
